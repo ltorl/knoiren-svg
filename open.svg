@@ -23,18 +23,13 @@
     // served by: a CDN may hand out a week-old copy of v2.html long after it
     // changed, and raw.githubusercontent never does. The copy next to this file
     // is the fallback, for a network that blocks raw.
-    var RAW = 'https://raw.githubusercontent.com/ltorl/knoiren-browser/main/v2.html';
+    var RAW = 'https://raw.githubusercontent.com/ltorl/knoiren-browser/main/index.html';
 
     function ui() {
         return fetch(RAW, { cache: 'no-store' }).then(function (r) {
             if (!r.ok) throw new Error('raw.githubusercontent.com answered ' + r.status);
             return r.text();
-        }).catch(function () {
-            return fetch('./v2.html').then(function (r) {
-                if (!r.ok) throw new Error('./v2.html answered ' + r.status);
-                return r.text();
-            });
-        });
+        })
     }
 
     function launch() {
